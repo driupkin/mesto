@@ -1,0 +1,12 @@
+@import url('./__title/form__title.css');
+@import url('./__field/form__field.css');
+@import url('./__field/_name/form__field_name.css');
+@import url('./__button/form__button.css');
+@import url('./__container/form__container.css');
+.form {
+    width: 430px;
+    height: 330px;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+}
