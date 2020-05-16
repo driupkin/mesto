@@ -4,8 +4,9 @@
     background: #000000;
     border-radius: 2px;
     font-size: 18px;
-    line-height: 22px;
+    line-height: 1.22;
     text-align: center;
     color: #FFFFFF;
     margin-top: 48px;
+    cursor: pointer;
 }
