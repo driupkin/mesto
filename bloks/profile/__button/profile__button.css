@@ -3,4 +3,8 @@
     background-color: transparent;
     background-repeat: no-repeat;
     background-position: center;
+    transition: opacity 1s ease;
+}
+.profile__button:hover {
+    opacity: 0.6;
 }

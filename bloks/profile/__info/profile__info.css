@@ -1,5 +1,11 @@
 .profile__info {
-    height: 77px;
+    min-height: 77px;
     color: #ffffff;
     margin-right: auto;
+}
+
+@media screen and (max-width: 320px) {
+    .profile__info {
+        margin: 0;
+    }
 }

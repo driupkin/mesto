@@ -1,4 +1,5 @@
 @import url('../vendor/normalize.css');
+@import url('../fonts/inter.css');
 @import url('../bloks/popup/popup.css');
 @import url('../bloks/root/root.css');
 @import url('../bloks/page/page.css');
@@ -10,3 +11,4 @@
 @import url('../bloks/like/like.css');
 @import url('../bloks/footer/footer.css');
 @import url('../bloks/form/form.css');
+@import url('../bloks/popup/_opened/popup_opened.css');
