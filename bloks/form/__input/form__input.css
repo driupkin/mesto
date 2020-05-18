@@ -6,4 +6,9 @@
     font-size: 14px;
     line-height: 17px;
     color: #000000;
+    margin-bottom: 30px;
+}
+
+.form__input:last-child {
+    margin-bottom: 0;
 }

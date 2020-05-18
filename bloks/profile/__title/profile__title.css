@@ -1,16 +1,4 @@
 .profile__title {
-    font-weight: 500;
-    font-size: 42px;
-    line-height: 1.33;
     display: flex;
     align-items: baseline;
-}
-
-@media screen and (max-width: 320px) {
-    .profile__title {
-        font-weight: 500;
-        font-size: 27px;
-        line-height: 2.07;
-        text-align: center;
-    }
 }

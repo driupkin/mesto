@@ -3,7 +3,7 @@
     line-height: 1.22;
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 550px) {
     .profile__subtitle {
         font-size: 15px;
         line-height: 15px;

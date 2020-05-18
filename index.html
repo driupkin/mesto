@@ -9,85 +9,86 @@
 </head>
 
 <body class="root">
-    <section class="popup">
-        <div class="popup__container">
-            <button class="popup__close"></button>
-            <form class="form">
-                <p class="form__title">Редактировать профиль</p>
-                <fieldset class="form__field">
-                    <input class="form__input form__input_name" type="text">
-                    <input class="form__input form__input_description" type="text">
-                </fieldset>
-                <button class="form__button">Сохранить</button>
-            </form>
-        </div>
-    </section>
     <div class="page">
         <header class="header">
             <div class="logo"></div>
         </header>
         <main class="content">
             <section class="profile">
-                <img src="./images/profile-images/Kusto.jpg" alt="Кусто" class="profile__avatar">
+                <img src="./images/profile-images/kusto.jpg" alt="Кусто" class="profile__avatar">
                 <div class="profile__info">
                     <div class="profile__title">
-                        <p>Жак-Ив Кусто</p>
-                        <button class="profile__button profile__button_edit"></button>
+                        <h1 class="profile__name">Жак-Ив Кусто</h1>
+                        <button type="button" class="profile__button profile__button_edit"></button>
                     </div>
                     <p class="profile__subtitle">Исследователь океана</p>
                 </div>
-                <button class="profile__button profile__button_add"></button>
+                <button type="button" class="profile__button profile__button_add"></button>
             </section>
             <section class="elements">
                 <div class="element">
-                    <img src="./images/Karachaevsk.jpg" alt="фото" class="element__image">
+                    <img src="./images/karachaevsk.jpg" alt="фото" class="element__image">
                     <div class="element__title">
-                        <p>Карачаевск</p>
-                        <div class="like"></div>
+                        <p class="element__paragraph">Карачаевск</p>
+                        <button class="element__like"></button>
                     </div>
                 </div>
                 <div class="element">
-                    <img src="./images/Elbrus.jpg" alt="фото" class="element__image">
+                    <img src="./images/elbrus.jpg" alt="фото" class="element__image">
                     <div class="element__title">
-                        <p>Гора Эльбрус</p>
-                        <div class="like"></div>
+                        <p class="element__paragraph">Гора Эльбрус</p>
+                        <button class="element__like"></button>
                     </div>
                 </div>
                 <div class="element">
-                    <img src="./images/Dombai.jpg" alt="фото" class="element__image">
+                    <img src="./images/dombai.jpg" alt="фото" class="element__image">
                     <div class="element__title">
-                        <p>Домбай</p>
-                        <div class="like"></div>
+                        <p class="element__paragraph">Домбай</p>
+                        <button class="element__like"></button>
                     </div>
                 </div>
                 <div class="element">
-                    <img src="./images/Elbrus.jpg" alt="фото" class="element__image">
+                    <img src="./images/elbrus.jpg" alt="фото" class="element__image">
                     <div class="element__title">
-                        <p>Гора Эльбрус</p>
-                        <div class="like"></div>
+                        <p class="element__paragraph">Гора Эльбрус</p>
+                        <button class="element__like"></button>
                     </div>
                 </div>
                 <div class="element">
-                    <img src="./images/Dombai.jpg" alt="фото" class="element__image">
+                    <img src="./images/dombai.jpg" alt="фото" class="element__image">
                     <div class="element__title">
-                        <p>Домбай</p>
-                        <div class="like"></div>
+                        <p class="element__paragraph">Домбай</p>
+                        <button class="element__like"></button>
                     </div>
                 </div>
                 <div class="element">
-                    <img src="./images/Karachaevsk.jpg" alt="фото" class="element__image">
+                    <img src="./images/karachaevsk.jpg" alt="фото" class="element__image">
                     <div class="element__title">
-                        <p>Карачаево-Ч...</p>
-                        <div class="like"></div>
+                        <p class="element__paragraph">Карачаево-Черкесия</p>
+                        <button class="element__like"></button>
                     </div>
                 </div>
             </section>
         </main>
         <footer class="footer">
-            <p>&copy;  2020 Mesto Russia</p>
+            <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
         </footer>
     </div>
-    <script src="script.js"></script>
+    <section class="popup">
+        <div class="popup__container">
+            <button type="button" class="popup__close"></button>
+            <form class="form" name="popup" method="GET" action="#">
+                <h2 class="form__title">Редактировать профиль</h2>
+                <fieldset class="form__field">
+                    <input name="name" placeholder="Имя профиля" class="form__input form__input_name" type="text" required>
+                    <input name="description" placeholder="Описание" class="form__input form__input_description" type="text"
+                        required>
+                </fieldset>
+                <button type="submit" class="form__button">Сохранить</button>
+            </form>
+        </div>
+    </section>
+    <script src="./script/script.js"></script>
 </body>
 
 </html>

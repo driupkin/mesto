@@ -1,10 +1,9 @@
 .profile__info {
-    min-height: 77px;
     color: #ffffff;
     margin-right: auto;
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 550px) {
     .profile__info {
         margin: 0;
     }
