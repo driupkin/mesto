@@ -1,5 +1,5 @@
 const popup = document.querySelector('.popup');
-const editPprofile = document.querySelector('.profile__button_edit');
+const editPprofile = document.querySelector('.profile__button-edit');
 const closePopup = document.querySelector('.popup__close');
 const formButton = document.querySelector('.form__button');
 let formElement = document.querySelector('.form');
@@ -9,9 +9,9 @@ let profileDescription = document.querySelector('.profile__subtitle');
 let jobInput = document.querySelector('.form__input_description');
 function formInput() {
     /**Заполнение формы имя */
-    nameInput.value = (profileName.textContent);
+    nameInput.value = profileName.textContent;
     /* Заполнение формы "описаниие"*/
-    jobInput.value = (profileDescription.textContent);
+    jobInput.value = profileDescription.textContent;
 }
 /*Функция открытия попапа*/
 function popupOpened() {
@@ -27,8 +27,9 @@ function formSubmitHandler(evt) {
     evt.preventDefault();
     profileName.textContent = nameInput.value;
     profileDescription.textContent = jobInput.value;
+    popupClosed();
 }
-formButton.addEventListener('click', popupClosed);
+popupClosed();
 formElement.addEventListener('submit', formSubmitHandler);
 editPprofile.addEventListener('click', popupOpened);
 closePopup.addEventListener('click', popupClosed);
