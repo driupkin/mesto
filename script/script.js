@@ -29,7 +29,6 @@ function formSubmitHandler(evt) {
     profileDescription.textContent = jobInput.value;
     popupClosed();
 }
-popupClosed();
 formElement.addEventListener('submit', formSubmitHandler);
 editPprofile.addEventListener('click', popupOpened);
 closePopup.addEventListener('click', popupClosed);
