@@ -26,48 +26,15 @@
                 <button type="button" class="profile__button-add"></button>
             </section>
             <section class="elements">
-                <div class="element">
-                    <img src="./images/karachaevsk.jpg" alt="Карачаевск" class="element__image">
-                    <div class="element__title">
-                        <h2 class="element__paragraph">Карачаевск</h2>
-                        <button class="element__like" type="button"></button>
+                <template id="card">
+                    <div class="element">
+                        <img src="" alt="" class="element__image">
+                        <div class="element__title">
+                            <h2 class="element__paragraph"></h2>
+                            <button class="element__like" type="button"></button>
+                        </div>
                     </div>
-                </div>
-                <div class="element">
-                    <img src="./images/elbrus.jpg" alt="Гора Эльбрус" class="element__image">
-                    <div class="element__title">
-                        <h2 class="element__paragraph">Гора Эльбрус</h2>
-                        <button class="element__like" type="button"></button>
-                    </div>
-                </div>
-                <div class="element">
-                    <img src="./images/dombai.jpg" alt="Домбай" class="element__image">
-                    <div class="element__title">
-                        <h2 class="element__paragraph">Домбай</h2>
-                        <button class="element__like" type="button"></button>
-                    </div>
-                </div>
-                <div class="element">
-                    <img src="./images/elbrus.jpg" alt="Гора Эльбрус" class="element__image">
-                    <div class="element__title">
-                        <h2 class="element__paragraph">Гора Эльбрус</h2>
-                        <button class="element__like" type="button"></button>
-                    </div>
-                </div>
-                <div class="element">
-                    <img src="./images/dombai.jpg" alt="Домбай" class="element__image">
-                    <div class="element__title">
-                        <h2 class="element__paragraph">Домбай</h2>
-                        <button class="element__like" type="button"></button>
-                    </div>
-                </div>
-                <div class="element">
-                    <img src="./images/karachaevsk.jpg" alt="Карачаево-Черкесия" class="element__image">
-                    <div class="element__title">
-                        <h2 class="element__paragraph">Карачаево-Черкесия</h2>
-                        <button class="element__like" type="button"></button>
-                    </div>
-                </div>
+                </template>
             </section>
         </main>
         <footer class="footer">
@@ -80,9 +47,10 @@
             <form class="form" name="popup" method="GET" action="#">
                 <h2 class="form__title">Редактировать профиль</h2>
                 <fieldset class="form__field">
-                    <input name="name" placeholder="Имя профиля" class="form__input form__input_name" type="text" required>
-                    <input name="description" placeholder="Описание" class="form__input form__input_description" type="text"
+                    <input name="name" placeholder="Имя профиля" class="form__input form__input_name" type="text"
                         required>
+                    <input name="description" placeholder="Описание" class="form__input form__input_description"
+                        type="text" required>
                 </fieldset>
                 <button type="submit" class="form__button">Сохранить</button>
             </form>
