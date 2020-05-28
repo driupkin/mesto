@@ -37,7 +37,7 @@ const initialCards = [
     }
 
 ];
-addInitialCards(initialCards.length);
+addInitialCards(6);
 function formInput() {
     //Заполнение формы имя
     nameInput.value = profileName.textContent;
@@ -57,33 +57,29 @@ function addFormInput() {
 function popupOpenClose() {
     popup.classList.toggle('popup_opened');
     formTitle.textContent = 'Редактировать профиль';
-    formElement.addEventListener('submit', formSubmitHandler);
     formInput();
 }
 
 function addPopupOpen() {
     popup.classList.toggle('popup_opened');
     formTitle.textContent = 'Новое место';
-    formElement.addEventListener('submit', addFormSubmitHandler);
     addFormInput();
 }
-/**Изменение данных в профиле */
+// Изменение данных в профиле
 function formSubmitHandler(evt) {
     evt.preventDefault();
     profileName.textContent = nameInput.value;
     profileDescription.textContent = jobInput.value;
     popupOpenClose();
 }
-// сохранение картинок
-function addFormSubmitHandler(evt) {
+// сохранение карточек
+/**function addFormSubmitHandler(evt) {
     evt.preventDefault();
     initialCards.unshift({ name: `${nameInput.value}`, link: `${jobInput.value}` });
     addInitialCards(1);
-    popupOpenClose();
-    console.log(initialCards);
-}
-
-//addFormElement.addEventListener('submit', addFormSubmitHandler);
+    addPopupOpen();
+}*/
+formElement.addEventListener('submit', formSubmitHandler);
 editPprofile.addEventListener('click', popupOpenClose);
 closePopup.addEventListener('click', popupOpenClose);
 addProfile.addEventListener('click', addPopupOpen);
@@ -97,11 +93,15 @@ function addInitialCards(index) {
         cardElement.querySelector('.element__image').alt = initialCards[i].name;
         cardElement.querySelector('.element__paragraph').textContent = initialCards[i].name;
         elements.prepend(cardElement);
-
+        // лайк
         const likeButton = document.querySelector('.element__like');
-        likeButton.addEventListener('click', function (event) {
-            event.target.classList.toggle('element__like_active');
-            console.log(event);
+        likeButton.addEventListener('click', function (evt) {
+            evt.target.classList.toggle('element__like_active');
+        });
+        // удаление карточки    
+        const trashButton = document.querySelector('.element__trash');
+        trashButton.addEventListener('click', function (evt) {
+            evt.target.closest('.element').remove();
         });
     };
 

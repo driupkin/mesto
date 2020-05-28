@@ -3,4 +3,7 @@
     height: 282px;
     object-fit: fill;
     border-radius: 10px 10px 0 0;
+    position: relative;
+    bottom: 23px;
+    left: 0;
 }
