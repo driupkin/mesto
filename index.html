@@ -42,6 +42,7 @@
             <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
         </footer>
     </div>
+
     <section class="popup">
         <div class="popup__container">
             <button type="button" class="popup__close"></button>
@@ -54,6 +55,29 @@
                 </fieldset>
                 <button type="submit" class="form__button">Сохранить</button>
             </form>
+        </div>
+    </section>
+
+    <section class="popup popup_add-cards">
+        <div class="popup__container popup__container_add-card">
+            <button type="button" class="popup__close popup__close_add-card"></button>
+            <form class="form-cards" name="popup_add-cards" method="GET" action="#">
+                <h2 class="form__title form__title_add-card"></h2>
+                <fieldset class="form__field">
+                    <input name="place" placeholder="" class="form__input form__input_place" type="text" required>
+                    <input name="url" placeholder="" class="form__input form__input_url" type="text"
+                        required>
+                </fieldset>
+                <button type="submit" class="form__button form__button_add-card">Сохранить</button>
+            </form>
+        </div>
+    </section>
+
+    <section class="popup popup_cards">
+        <div class="popup__container popup__container_card">
+            <button type="button" class="popup__close popup__close_card"></button>
+            <img src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg" alt=""
+                class="popup__imege">
         </div>
     </section>
     <script src="./script/script.js"></script>
