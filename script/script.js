@@ -1,7 +1,9 @@
 const popup = document.querySelector('.popup');
 const editPprofile = document.querySelector('.profile__button-edit');
+const addProfile = document.querySelector('.profile__button-add');
 const closePopup = document.querySelector('.popup__close');
 const formButton = document.querySelector('.form__button');
+const formTitle = document.querySelector('.form__title');
 let formElement = document.querySelector('.form');
 let profileName = document.querySelector('.profile__name');
 let nameInput = document.querySelector('.form__input_name');
@@ -32,36 +34,75 @@ const initialCards = [
         name: 'Байкал',
         link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
     }
+
 ];
+addInitialCards();
 function formInput() {
     /**Заполнение формы имя */
     nameInput.value = profileName.textContent;
+    nameInput.placeholder = 'Имя профиля';
     /* Заполнение формы "описаниие"*/
     jobInput.value = profileDescription.textContent;
+    jobInput.placeholder = 'Описание';
+}
+function addFormInput() {
+    nameInput.value = '';
+    nameInput.placeholder = 'Название';
+    /* Заполнение формы "описаниие"*/
+    jobInput.value = '';
+    jobInput.placeholder = 'Ссылка на картинку';
 }
 /*Функция открытия-закрытия попапа*/
-function popupOpened() {
+function popupOpenClose() {
     popup.classList.toggle('popup_opened');
+    formTitle.textContent = 'Редактировать профиль';
+    formElement.addEventListener('submit', formSubmitHandler);
     formInput();
 }
 
+function addPopupOpen() {
+    popup.classList.toggle('popup_opened');
+    formTitle.textContent = 'Новое место';
+    formElement.addEventListener('submit', addFormSubmitHandler);
+    addFormInput();
+}
 /**Изменение данных в профиле */
 function formSubmitHandler(evt) {
     evt.preventDefault();
     profileName.textContent = nameInput.value;
     profileDescription.textContent = jobInput.value;
-    popupOpened();
+    popupOpenClose();
 }
-formElement.addEventListener('submit', formSubmitHandler);
-editPprofile.addEventListener('click', popupOpened);
-closePopup.addEventListener('click', popupOpened);
+// сохранение картинок
+function addFormSubmitHandler(evt) {
+    evt.preventDefault();
+    initialCards.unshift({ name: `${nameInput.value}`, link: `${jobInput.value}` });
 
-initialCards.forEach(item => {
     const cardTemplate = document.querySelector('#card').content;
     const elements = document.querySelector('.elements');
     const cardElement = cardTemplate.cloneNode(true);
-    cardElement.querySelector('.element__image').src = item.link;
-    cardElement.querySelector('.element__image').alt = item.name;
-    cardElement.querySelector('.element__paragraph').textContent = item.name;
-    elements.append(cardElement);
-});
+    cardElement.querySelector('.element__image').src = initialCards[0].link;
+    cardElement.querySelector('.element__image').alt = initialCards[0].name;
+    cardElement.querySelector('.element__paragraph').textContent = initialCards[0].name;
+    elements.prepend(cardElement);
+
+    popupOpenClose();
+    console.log(initialCards);
+}
+
+//addFormElement.addEventListener('submit', addFormSubmitHandler);
+editPprofile.addEventListener('click', popupOpenClose);
+closePopup.addEventListener('click', popupOpenClose);
+addProfile.addEventListener('click', addPopupOpen);
+// карточки из массива
+function addInitialCards() {
+    initialCards.forEach(function (item) {
+        const cardTemplate = document.querySelector('#card').content;
+        const elements = document.querySelector('.elements');
+        const cardElement = cardTemplate.cloneNode(true);
+        cardElement.querySelector('.element__image').src = item.link;
+        cardElement.querySelector('.element__image').alt = item.name;
+        cardElement.querySelector('.element__paragraph').textContent = item.name;
+        elements.append(cardElement);
+    });
+}
