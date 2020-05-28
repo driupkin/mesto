@@ -2,6 +2,7 @@
 @import url('../element/__image/element__image.css');
 @import url('../element/__like/element__like.css');
 @import url('./__paragraph/element__paragraph.css');
+@import url('./__like/_active/element__like_active.css');
 .element {
     width: 282px;
     background-color: white;

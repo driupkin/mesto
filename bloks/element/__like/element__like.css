@@ -10,6 +10,11 @@
     margin-left: auto;
     cursor: pointer;
     border: 0;
+    padding: 0;
+}
+
+.element__like:active, .element__like:focus {
+    outline: none;
 }
 
 .element__like:hover {
