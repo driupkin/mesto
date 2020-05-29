@@ -116,7 +116,12 @@ function popupImegeOpenClose() {
         popupCards.classList.toggle('popup_opened');
         const popupImage = document.querySelector('.popup__imege');
         const urlImage = evt.target.getAttribute('src');
+        const placeName = evt.target.getAttribute('alt');
+        const popupSubTitle = document.querySelector('.popup__subtitle');
         popupImage.setAttribute('src', urlImage);
+        popupImage.setAttribute('alt', placeName);
+        popupSubTitle.textContent = placeName;
+        console.log(placeName);
     }
     );
 }

@@ -3,8 +3,12 @@
 @import url('./_cards/popup_cards.css');
 @import url('./__container/_card/popup__container_card.css');
 @import url('./__imege/popup__imege.css');
+@import url('./__subtitle/popup__subtitle.css');
 .popup {
-    display: none;
+    display: flex;
+    visibility: hidden;
+    opacity: 0;
+    
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
