@@ -121,7 +121,6 @@ function popupImegeOpenClose() {
         popupImage.setAttribute('src', urlImage);
         popupImage.setAttribute('alt', placeName);
         popupSubTitle.textContent = placeName;
-        console.log(placeName);
     }
     );
 }

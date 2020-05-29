@@ -10,5 +10,6 @@
     .form__title {
         font-size: 6vw;
         line-height: 1.21;
+        margin-bottom: 26px;
     }
 }
