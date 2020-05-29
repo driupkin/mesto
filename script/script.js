@@ -106,18 +106,17 @@ function addInitialCards(index) {
         trashButton.addEventListener('click', function (evt) {
             evt.target.closest('.element').remove();
         });
-
         popupImegeOpenClose();
     };
-
-
 }
 // Открытие попапа с картинкой
 function popupImegeOpenClose() {
     const cardImage = document.querySelector('.element__image');
     cardImage.addEventListener('click', function (evt) {
         popupCards.classList.toggle('popup_opened');
-        evt.target;
+        const popupImage = document.querySelector('.popup__imege');
+        const urlImage = evt.target.getAttribute('src');
+        popupImage.setAttribute('src', urlImage);
     }
     );
 }
