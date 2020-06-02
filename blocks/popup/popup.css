@@ -2,7 +2,7 @@
 @import url('./__close/popup__close.css');
 @import url('./_cards/popup_cards.css');
 @import url('./__container/_card/popup__container_card.css');
-@import url('./__imege/popup__imege.css');
+@import url('./__image/popup__image.css');
 @import url('./__subtitle/popup__subtitle.css');
 .popup {
     display: flex;

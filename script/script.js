@@ -1,20 +1,22 @@
-const popup = document.querySelector('.popup');
+const popupEditProfile = document.querySelector('.popup_edit-profile');
 const popupAddCards = document.querySelector('.popup_add-cards');
 const editPprofile = document.querySelector('.profile__button-edit');
 const addProfile = document.querySelector('.profile__button-add');
 const closePopup = document.querySelector('.popup__close');
-const formTitle = document.querySelector('.form__title');
 const popupCards = document.querySelector('.popup_cards');
 const closePopupAddCards = document.querySelector('.popup__close_add-card');
 const closePopupCardsButton = document.querySelector('.popup__close_card');
 const formElement = document.querySelector('.form');
 const addFormCards = document.querySelector('.form-cards');
-let profileName = document.querySelector('.profile__name');
-let nameInput = document.querySelector('.form__input_name');
-let profileDescription = document.querySelector('.profile__subtitle');
-let jobInput = document.querySelector('.form__input_description');
-let placeInput = document.querySelector('.form__input_place');
-let urlInput = document.querySelector('.form__input_url');
+const profileName = document.querySelector('.profile__name');
+const profileDescription = document.querySelector('.profile__subtitle');
+const elements = document.querySelector('.elements');
+const popupImage = document.querySelector('.popup__image');
+const popupSubTitle = document.querySelector('.popup__subtitle');
+const nameInput = document.querySelector('.form__input_name');
+const jobInput = document.querySelector('.form__input_description');
+const placeInput = document.querySelector('.form__input_place');
+const urlInput = document.querySelector('.form__input_url');
 const initialCards = [
     {
         name: 'Архыз',
@@ -48,11 +50,8 @@ function popupOpenClose(popupName) {
     formInput();
 }
 // добавление карточек
-function addInitialCards(nameValue, urlValue) {
-    placeInput.value = '';
-    urlInput.value = '';
+function addCards(nameValue, urlValue) {
     const cardTemplate = document.querySelector('#card').content;
-    const elements = document.querySelector('.elements');
     const cardElement = cardTemplate.cloneNode(true);
     const cardElementImage = cardElement.querySelector('.element__image');
     cardElementImage.alt = nameValue;
@@ -68,11 +67,10 @@ function addInitialCards(nameValue, urlValue) {
     });
     // Открытие попапа с картинкой
     cardElementImage.addEventListener('click', function () {
-        popupCards.classList.toggle('popup_opened');
-        const popupImage = document.querySelector('.popup__imege');
+        popupOpenClose(popupCards);
         popupImage.setAttribute('src', urlValue);
         popupImage.setAttribute('alt', nameValue);
-        document.querySelector('.popup__subtitle').textContent = nameValue;
+        popupSubTitle.textContent = nameValue;
     }
     );
     elements.prepend(cardElement);
@@ -81,11 +79,13 @@ function addInitialCards(nameValue, urlValue) {
 // сохранение карточек
 function addFormSubmitHandler(evt) {
     evt.preventDefault();
-    addInitialCards(placeInput.value, urlInput.value);
+    addCards(placeInput.value, urlInput.value);
     popupOpenClose(popupAddCards);
+    placeInput.value = '';
+    urlInput.value = '';
 }
 
-initialCards.forEach(item => addInitialCards(item.name, item.link));
+initialCards.forEach(item => addCards(item.name, item.link));
 
 function formInput() {
     //Заполнение формы имя
@@ -99,13 +99,13 @@ function formSubmitHandler(evt) {
     evt.preventDefault();
     profileName.textContent = nameInput.value;
     profileDescription.textContent = jobInput.value;
-    popupOpenClose(popup);
+    popupOpenClose(popupEditProfile);
 }
 
 formElement.addEventListener('submit', formSubmitHandler);
 addFormCards.addEventListener('submit', addFormSubmitHandler);
-editPprofile.addEventListener('click', evt => evt = popupOpenClose(popup));
-closePopup.addEventListener('click', evt => evt = popupOpenClose(popup));
-addProfile.addEventListener('click', evt => evt = popupOpenClose(popupAddCards));
-closePopupAddCards.addEventListener('click', evt => evt = popupOpenClose(popupAddCards));
-closePopupCardsButton.addEventListener('click', evt => evt = popupOpenClose(popupCards));
+editPprofile.addEventListener('click', evt => popupOpenClose(popupEditProfile));
+closePopup.addEventListener('click', evt => popupOpenClose(popupEditProfile));
+addProfile.addEventListener('click', evt => popupOpenClose(popupAddCards));
+closePopupAddCards.addEventListener('click', evt => popupOpenClose(popupAddCards));
+closePopupCardsButton.addEventListener('click', evt => popupOpenClose(popupCards));
