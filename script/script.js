@@ -18,6 +18,7 @@ const jobInput = document.querySelector('.form__input_description');
 const placeInput = document.querySelector('.form__input_place');
 const urlInput = document.querySelector('.form__input_url');
 const formButtonEdit = document.querySelector('.form__button');
+const formButtonAddCards = document.querySelector('.form__button_add-card');
 const initialCards = [
     {
         name: 'Архыз',
@@ -85,15 +86,28 @@ function addFormSubmitHandler(evt) {
     popupOpenClose(popupAddCards);
     addFormCards.reset();
 }
-
+// добавление карточек из массива
 initialCards.forEach(item => addCards(item.name, item.link));
 
 function formInput() {
-    //Заполнение формы имя
+    // Заполнение формы имя
     nameInput.value = profileName.textContent;
     // Заполнение формы "описаниие"
     jobInput.value = profileDescription.textContent;
+    // активация кнопки формы профиля
     formButtonEdit.classList.remove('form__button_inactive');
+    // дезактивация кнопки формы карточек
+    formButtonAddCards.classList.add('form__button_inactive');
+    // убираем красную линию
+    const removeErrors = Array.from(document.querySelectorAll('.form__input'));
+    removeErrors.forEach((item) => {
+        item.classList.remove('form__input_type_error');
+    });
+    // убираем текст ошибки
+    const removeErrorElement = Array.from(document.querySelectorAll('.form__input-error'));
+    removeErrorElement.forEach((item) => {
+        item.textContent = '';
+    });
 }
 
 // Изменение данных в профиле
@@ -108,7 +122,7 @@ function formSubmitHandler(evt) {
 function popupOverlayClose() {
     const popup = Array.from(document.querySelectorAll('.popup'));
     popup.forEach((item) => {
-        item.addEventListener('click', evt => {
+        item.addEventListener('mousedown', evt => {
             if (evt.target === item) {
                 popupOpenClose(item);
             }
