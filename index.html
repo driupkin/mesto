@@ -49,11 +49,14 @@
             <form class="form" name="popup" method="GET" action="#">
                 <h2 class="form__title">Редактировать профиль</h2>
                 <fieldset class="form__field">
-                    <input name="name" placeholder="Имя профиля" class="form__input form__input_name" type="text" required>
-                    <input name="description" placeholder="Описание" class="form__input form__input_description" type="text"
-                        required>
+                    <input name="name" placeholder="Имя профиля" class="form__input form__input_name" type="text"
+                        id="name-input" required minlength="2" maxlength="40">
+                    <span class='form__input-error' id='name-input-error'></span>
+                    <input name="description" placeholder="Описание" class="form__input form__input_description"
+                        id="description-input" type="text" required minlength="2" maxlength="200">
+                    <span class='form__input-error' id='description-input-error'></span>
+                    <button type="submit" class="form__button">Сохранить</button>
                 </fieldset>
-                <button type="submit" class="form__button">Сохранить</button>
             </form>
         </div>
     </section>
@@ -64,8 +67,10 @@
             <form class="form-cards" name="popup_add-cards" method="GET" action="#">
                 <h2 class="form__title form__title_add-card">Новое место</h2>
                 <fieldset class="form__field">
-                    <input name="place" placeholder="Название" class="form__input form__input_place" type="text" required>
-                    <input name="url" placeholder="Ссылка на картинку" class="form__input form__input_url" type="text" required>
+                    <input name="place" placeholder="Название" class="form__input form__input_place" type="text"
+                        required>
+                    <input name="url" placeholder="Ссылка на картинку" class="form__input form__input_url" type="text"
+                        required>
                 </fieldset>
                 <button type="submit" class="form__button form__button_add-card">Создать</button>
             </form>
