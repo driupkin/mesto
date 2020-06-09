@@ -109,24 +109,7 @@ function formSubmitHandler(evt) {
     popupOpenClose(popupEditProfile);
 }
 
-formElement.addEventListener('submit', formSubmitHandler);
-addFormCards.addEventListener('submit', addFormSubmitHandler);
-editPprofile.addEventListener('click', evt => popupOpenClose(popupEditProfile));
-addProfile.addEventListener('click', evt => popupOpenClose(popupAddCards));
-// popup.addEventListener('click', evt => {
-//     popupOpenClose(popupEditProfile);
-//     popupOpenClose(popupAddCards);
-// });
-closePopup.addEventListener('click', evt => popupOpenClose(popupEditProfile));
-closePopupAddCards.addEventListener('click', evt => popupOpenClose(popupAddCards));
-closePopupCardsButton.addEventListener('click', evt => popupOpenClose(popupCards));
-document.addEventListener('keydown', (evt) => {
-    if (evt.key === 'Escape') {
-        popupEditProfile.classList.remove('popup_opened');
-        popupAddCards.classList.remove('popup_opened');
-        popupCards.classList.remove('popup_opened');
-    }
-});
+
 // добавляем подпись ошибки заполнения формы
 const showInputError = (formElement, inputElement, errorMessage) => {
     const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
@@ -191,3 +174,29 @@ const enableValidation = () => {
 };
 
 enableValidation();
+
+formElement.addEventListener('submit', formSubmitHandler);
+addFormCards.addEventListener('submit', addFormSubmitHandler);
+editPprofile.addEventListener('click', evt => popupOpenClose(popupEditProfile));
+addProfile.addEventListener('click', evt => popupOpenClose(popupAddCards));
+// функция закрытия попапа кликом по фону
+function popupOverlayClose() {
+    const popup = Array.from(document.querySelectorAll('.popup'));
+    popup.forEach((item) => {
+        item.addEventListener('click', evt => {
+            if (evt.target === item)
+                popupOpenClose(item);
+        });
+    });
+}
+popupOverlayClose()
+closePopup.addEventListener('click', evt => popupOpenClose(popupEditProfile));
+closePopupAddCards.addEventListener('click', evt => popupOpenClose(popupAddCards));
+closePopupCardsButton.addEventListener('click', evt => popupOpenClose(popupCards));
+document.addEventListener('keydown', (evt) => {
+    if (evt.key === 'Escape') {
+        popupEditProfile.classList.remove('popup_opened');
+        popupAddCards.classList.remove('popup_opened');
+        popupCards.classList.remove('popup_opened');
+    }
+});
