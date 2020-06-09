@@ -7,7 +7,7 @@ const popupCards = document.querySelector('.popup_cards');
 const closePopupAddCards = document.querySelector('.popup__close_add-card');
 const closePopupCardsButton = document.querySelector('.popup__close_card');
 const formElement = document.querySelector('.form');
-const addFormCards = document.querySelector('.form-cards');
+const addFormCards = document.querySelector('.form_cards');
 const profileName = document.querySelector('.profile__name');
 const profileDescription = document.querySelector('.profile__subtitle');
 const elements = document.querySelector('.elements');
@@ -17,6 +17,8 @@ const nameInput = document.querySelector('.form__input_name');
 const jobInput = document.querySelector('.form__input_description');
 const placeInput = document.querySelector('.form__input_place');
 const urlInput = document.querySelector('.form__input_url');
+const formButtonEdit = document.querySelector('.form__button');
+const formButtonAddCards = document.querySelector('.form__button_add-card');
 const initialCards = [
     {
         name: 'Архыз',
@@ -44,6 +46,7 @@ const initialCards = [
     }
 
 ];
+
 // Функция открытия-закрытия попапа
 function popupOpenClose(popupName) {
     popupName.classList.toggle('popup_opened');
@@ -67,10 +70,10 @@ function addCards(nameValue, urlValue) {
     });
     // Открытие попапа с картинкой
     cardElementImage.addEventListener('click', function () {
-        popupOpenClose(popupCards);
         popupImage.setAttribute('src', urlValue);
         popupImage.setAttribute('alt', nameValue);
         popupSubTitle.textContent = nameValue;
+        popupOpenClose(popupCards);
     }
     );
     elements.prepend(cardElement);
@@ -81,17 +84,30 @@ function addFormSubmitHandler(evt) {
     evt.preventDefault();
     addCards(placeInput.value, urlInput.value);
     popupOpenClose(popupAddCards);
-    placeInput.value = '';
-    urlInput.value = '';
+    addFormCards.reset();
 }
-
+// добавление карточек из массива
 initialCards.forEach(item => addCards(item.name, item.link));
 
 function formInput() {
-    //Заполнение формы имя
+    // Заполнение формы имя
     nameInput.value = profileName.textContent;
     // Заполнение формы "описаниие"
     jobInput.value = profileDescription.textContent;
+    // активация кнопки формы профиля
+    formButtonEdit.classList.remove('form__button_inactive');
+    // дезактивация кнопки формы карточек
+    formButtonAddCards.classList.add('form__button_inactive');
+    // убираем красную линию
+    const removeErrors = Array.from(document.querySelectorAll('.form__input'));
+    removeErrors.forEach((item) => {
+        item.classList.remove('form__input_type_error');
+    });
+    // убираем текст ошибки
+    const removeErrorElement = Array.from(document.querySelectorAll('.form__input-error'));
+    removeErrorElement.forEach((item) => {
+        item.textContent = '';
+    });
 }
 
 // Изменение данных в профиле
@@ -102,10 +118,27 @@ function formSubmitHandler(evt) {
     popupOpenClose(popupEditProfile);
 }
 
+// функция закрытия попапа кликом по фону и клавишей Esc
+function popupOverlayClose() {
+    const popup = Array.from(document.querySelectorAll('.popup'));
+    popup.forEach((item) => {
+        item.addEventListener('mousedown', evt => {
+            if (evt.target === item) {
+                popupOpenClose(item);
+            }
+        });
+        document.addEventListener('keydown', (evt) => {
+            if (evt.key === 'Escape') {
+                item.classList.remove('popup_opened');
+            }
+        });
+    });
+}
+popupOverlayClose();
 formElement.addEventListener('submit', formSubmitHandler);
 addFormCards.addEventListener('submit', addFormSubmitHandler);
 editPprofile.addEventListener('click', evt => popupOpenClose(popupEditProfile));
-closePopup.addEventListener('click', evt => popupOpenClose(popupEditProfile));
 addProfile.addEventListener('click', evt => popupOpenClose(popupAddCards));
+closePopup.addEventListener('click', evt => popupOpenClose(popupEditProfile));
 closePopupAddCards.addEventListener('click', evt => popupOpenClose(popupAddCards));
 closePopupCardsButton.addEventListener('click', evt => popupOpenClose(popupCards));

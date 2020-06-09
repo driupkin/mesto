@@ -7,6 +7,7 @@
     line-height: 17px;
     color: #000000;
     margin-bottom: 30px;
+    outline: none;
 }
 
 .form__input:last-child {
