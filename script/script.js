@@ -47,6 +47,26 @@ const initialCards = [
 
 ];
 
+function formInput() {
+    // Заполнение формы имя
+    nameInput.value = profileName.textContent;
+    // Заполнение формы "описаниие"
+    jobInput.value = profileDescription.textContent;
+    // активация кнопки формы профиля
+    formButtonEdit.classList.remove('form__button_inactive');
+    // дезактивация кнопки формы карточек
+    formButtonAddCards.classList.add('form__button_inactive');
+    // убираем красную линию
+    const removeErrors = Array.from(document.querySelectorAll('.form__input'));
+    removeErrors.forEach((item) => {
+        item.classList.remove('form__input_type_error');
+    });
+    // убираем текст ошибки
+    const removeErrorTexts = Array.from(document.querySelectorAll('.form__input-error'));
+    removeErrorTexts.forEach((item) => {
+        item.textContent = '';
+    });
+}
 // Функция открытия-закрытия попапа
 function popupOpenClose(popupName) {
     popupName.classList.toggle('popup_opened');
@@ -89,27 +109,6 @@ function addFormSubmitHandler(evt) {
 // добавление карточек из массива
 initialCards.forEach(item => addCards(item.name, item.link));
 
-function formInput() {
-    // Заполнение формы имя
-    nameInput.value = profileName.textContent;
-    // Заполнение формы "описаниие"
-    jobInput.value = profileDescription.textContent;
-    // активация кнопки формы профиля
-    formButtonEdit.classList.remove('form__button_inactive');
-    // дезактивация кнопки формы карточек
-    formButtonAddCards.classList.add('form__button_inactive');
-    // убираем красную линию
-    const removeErrors = Array.from(document.querySelectorAll('.form__input'));
-    removeErrors.forEach((item) => {
-        item.classList.remove('form__input_type_error');
-    });
-    // убираем текст ошибки
-    const removeErrorElement = Array.from(document.querySelectorAll('.form__input-error'));
-    removeErrorElement.forEach((item) => {
-        item.textContent = '';
-    });
-}
-
 // Изменение данных в профиле
 function formSubmitHandler(evt) {
     evt.preventDefault();
@@ -120,8 +119,8 @@ function formSubmitHandler(evt) {
 
 // функция закрытия попапа кликом по фону и клавишей Esc
 function popupOverlayClose() {
-    const popup = Array.from(document.querySelectorAll('.popup'));
-    popup.forEach((item) => {
+    const popupList = Array.from(document.querySelectorAll('.popup'));
+    popupList.forEach((item) => {
         item.addEventListener('mousedown', evt => {
             if (evt.target === item) {
                 popupOpenClose(item);
@@ -137,8 +136,8 @@ function popupOverlayClose() {
 popupOverlayClose();
 formElement.addEventListener('submit', formSubmitHandler);
 addFormCards.addEventListener('submit', addFormSubmitHandler);
-editPprofile.addEventListener('click', evt => popupOpenClose(popupEditProfile));
-addProfile.addEventListener('click', evt => popupOpenClose(popupAddCards));
-closePopup.addEventListener('click', evt => popupOpenClose(popupEditProfile));
-closePopupAddCards.addEventListener('click', evt => popupOpenClose(popupAddCards));
-closePopupCardsButton.addEventListener('click', evt => popupOpenClose(popupCards));
+editPprofile.addEventListener('click', () => popupOpenClose(popupEditProfile));
+addProfile.addEventListener('click', () => popupOpenClose(popupAddCards));
+closePopup.addEventListener('click', () => popupOpenClose(popupEditProfile));
+closePopupAddCards.addEventListener('click', () => popupOpenClose(popupAddCards));
+closePopupCardsButton.addEventListener('click', () => popupOpenClose(popupCards));
