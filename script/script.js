@@ -1,4 +1,5 @@
-import { Card } from './card.js';
+import {Card} from './card.js';
+import {FormValidator} from './FormValidator.js';
 const popupEditProfile = document.querySelector('.popup_edit-profile');
 const popupAddCards = document.querySelector('.popup_add-cards');
 const editPprofile = document.querySelector('.profile__button-edit');
@@ -18,6 +19,19 @@ const placeInput = document.querySelector('.form__input_place');
 const urlInput = document.querySelector('.form__input_url');
 const formButtonEdit = document.querySelector('.form__button');
 const formButtonAddCards = document.querySelector('.form__button_add-card');
+const validation = {
+    formSelector: '.form',
+    inputSelector: '.form__input',
+    submitButtonSelector: '.form__button',
+    inactiveButtonClass: 'form__button_inactive',
+    inputErrorClass: 'form__input_type_error',
+    errorClass: 'form__error_visible',
+    fildSelector: '.form__field'
+};
+const selector = document.querySelector('.form');
+const cardsSelector = document.querySelector('.form_cards');
+const formValidation = new FormValidator(validation, selector);
+const cardsFormValidation = new FormValidator(validation, cardsSelector);
 const initialCards = [
     {
         name: 'Архыз',
@@ -45,6 +59,9 @@ const initialCards = [
     }
 
 ];
+
+formValidation.enableValidation();
+cardsFormValidation.enableValidation();
 
 function formInput() {
     // Заполнение формы имя

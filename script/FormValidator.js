@@ -1,41 +1,26 @@
-const validation = {
-    formSelector: '.form',
-    inputSelector: '.form__input',
-    submitButtonSelector: '.form__button',
-    inactiveButtonClass: 'form__button_inactive',
-    inputErrorClass: 'form__input_type_error',
-    errorClass: 'form__error_visible',
-    fildSelector: '.form__field'
-};
-const selector = document.querySelector('.form');
-const cardsSelector = document.querySelector('.form_cards');
-
-class FormValidator {
+export class FormValidator {
     constructor(data, formSelector) {
         this._data = data;
         this._formSelector = formSelector;
     }
 
-    _showInputError(errorMessage) {
-        const inputElement = this._formSelector.querySelector(this._data.inputSelector);
+    _showInputError(errorMessage, inputElement) {
         const errorElement = this._formSelector.querySelector(`#${inputElement.id}-error`);
         inputElement.classList.add(this._data.inputErrorClass);
         errorElement.textContent = errorMessage;
     }
 
-    _hideInputError() {
-        const inputElement = this._formSelector.querySelector(this._data.inputSelector);
+    _hideInputError(inputElement) {
         const errorElement = this._formSelector.querySelector(`#${inputElement.id}-error`);
         inputElement.classList.remove(this._data.inputErrorClass);
         errorElement.textContent = '';
     }
 
-    _checkInputValidity() {
-        const inputElement = this._formSelector.querySelector(this._data.inputSelector);
+    _checkInputValidity(inputElement) {
         if (!inputElement.validity.valid) {
-            this._showInputError(inputElement.validationMessage);
+            this._showInputError(inputElement.validationMessage, inputElement);
         } else {
-            this._hideInputError();
+            this._hideInputError(inputElement);
         }
     }
 
@@ -54,17 +39,18 @@ class FormValidator {
     }
 
     enableValidation() {
-
         // создаём массив полей
         const fieldsetList = Array.from(this._formSelector.querySelectorAll(this._data.fildSelector));
+        console.log(fieldsetList);
         // для каждого поля
         fieldsetList.forEach((fieldset) => {
             // создаём массив инпутов
             const inputList = Array.from(fieldset.querySelectorAll(this._data.inputSelector));
+            console.log(inputList);
             // для каждого инпута создаём слушатель с проверкой валидности
             inputList.forEach((inputElement) => {
                 inputElement.addEventListener('input', () => {
-                    this._checkInputValidity();
+                    this._checkInputValidity(inputElement);
                     // находим кнопку отправки, сохранения данных
                     const buttonElement = fieldset.querySelector(this._data.submitButtonSelector);
                     // вызываем функцию активации, дезактивации кнопки
@@ -77,8 +63,3 @@ class FormValidator {
         });
     }
 }
-
-const formValidation = new FormValidator(validation, selector);
-formValidation.enableValidation();
-const cardsFormValidation = new FormValidator(validation, cardsSelector);
-cardsFormValidation.enableValidation();
