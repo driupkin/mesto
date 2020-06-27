@@ -1,3 +1,4 @@
+
 // добавляем подпись ошибки заполнения формы
 const showInputError = (formElement, inputElement, errorMessage, inputErrorClass) => {
     const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
@@ -20,6 +21,7 @@ const checkInputValidity = (formElement, inputElement, inputErrorClass) => {
 };
 // валидация посимвольно
 const hasInvalidInput = (inputList) => {
+    console.log(inputList);
     return inputList.some((inputElement) => {
         return !inputElement.validity.valid;
     });
@@ -60,6 +62,7 @@ const enableValidation = (item) => {
         });
     });
 }
+
 enableValidation({
     formSelector: '.form',
     inputSelector: '.form__input',
