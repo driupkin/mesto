@@ -1,9 +1,10 @@
+import { Card } from './card.js';
 const popupEditProfile = document.querySelector('.popup_edit-profile');
 const popupAddCards = document.querySelector('.popup_add-cards');
 const editPprofile = document.querySelector('.profile__button-edit');
 const addProfile = document.querySelector('.profile__button-add');
 const closePopup = document.querySelector('.popup__close');
-const popupCards = document.querySelector('.popup_cards');
+export const popupCards = document.querySelector('.popup_cards');
 const closePopupAddCards = document.querySelector('.popup__close_add-card');
 const closePopupCardsButton = document.querySelector('.popup__close_card');
 const formElement = document.querySelector('.form');
@@ -11,8 +12,6 @@ const addFormCards = document.querySelector('.form_cards');
 const profileName = document.querySelector('.profile__name');
 const profileDescription = document.querySelector('.profile__subtitle');
 const elements = document.querySelector('.elements');
-const popupImage = document.querySelector('.popup__image');
-const popupSubTitle = document.querySelector('.popup__subtitle');
 const nameInput = document.querySelector('.form__input_name');
 const jobInput = document.querySelector('.form__input_description');
 const placeInput = document.querySelector('.form__input_place');
@@ -68,47 +67,26 @@ function formInput() {
     });
 }
 // Функция открытия-закрытия попапа
-function popupOpenClose(popupName) {
+export function popupOpenClose(popupName) {
     popupName.classList.toggle('popup_opened');
     formInput();
 }
-// добавление карточек
-function addCards(nameValue, urlValue) {
-    const cardTemplate = document.querySelector('#card').content;
-    const cardElement = cardTemplate.cloneNode(true);
-    const cardElementImage = cardElement.querySelector('.element__image');
-    cardElementImage.alt = nameValue;
-    cardElementImage.src = urlValue;
-    cardElement.querySelector('.element__paragraph').textContent = nameValue;
-    // добавляем слушатель лайка
-    cardElement.querySelector('.element__like').addEventListener('click', function (evt) {
-        evt.target.classList.toggle('element__like_active');
-    });
-    // добавляем слушатель удаления
-    cardElement.querySelector('.element__trash').addEventListener('click', function (evt) {
-        evt.target.closest('.element').remove();
-    });
-    // Открытие попапа с картинкой
-    cardElementImage.addEventListener('click', function () {
-        popupImage.setAttribute('src', urlValue);
-        popupImage.setAttribute('alt', nameValue);
-        popupSubTitle.textContent = nameValue;
-        popupOpenClose(popupCards);
-    }
-    );
-    elements.prepend(cardElement);
 
-}
 // сохранение карточек
 function addFormSubmitHandler(evt) {
     evt.preventDefault();
-    addCards(placeInput.value, urlInput.value);
+    const newCard = new Card(placeInput.value, urlInput.value, '#card');
+    const cardElement = newCard.generateCard();
+    elements.prepend(cardElement);
     popupOpenClose(popupAddCards);
     addFormCards.reset();
 }
 // добавление карточек из массива
-initialCards.forEach(item => addCards(item.name, item.link));
-
+initialCards.forEach(item => {
+    const card = new Card(item.name, item.link, '#card');
+    const cardElement = card.generateCard();
+    elements.prepend(cardElement);
+});
 // Изменение данных в профиле
 function formSubmitHandler(evt) {
     evt.preventDefault();
