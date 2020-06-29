@@ -1,12 +1,12 @@
 import { Card } from './Card.js';
 import { FormValidator } from './FormValidator.js';
-import { popupCards, validation, initialCards } from './constants.js';
+import { popupCards, validation, initialCards, popupList } from './constants.js';
 import { openPopup, closePopup } from './utils.js';
 const popupEditProfile = document.querySelector('.popup_edit-profile');
 const popupAddCards = document.querySelector('.popup_add-cards');
 const editProfile = document.querySelector('.profile__button-edit');
 const addProfile = document.querySelector('.profile__button-add');
-//const closePopupButton = document.querySelector('.popup__close');
+const closePopupProfile = document.querySelector('.popup__close');
 const closePopupAddCards = document.querySelector('.popup__close_add-card');
 const closePopupCardsButton = document.querySelector('.popup__close_card');
 const formElement = document.querySelector('.form');
@@ -47,16 +47,6 @@ function formInput() {
     formButtonEdit.classList.remove('form__button_inactive');
     // дезактивация кнопки формы карточек
     formButtonAddCards.classList.add('form__button_inactive');
-    // убираем красную линию
-    const removeErrors = Array.from(document.querySelectorAll('.form__input'));
-    removeErrors.forEach((item) => {
-        item.classList.remove('form__input_type_error');
-    });
-    // убираем текст ошибки
-    const removeErrorTexts = Array.from(document.querySelectorAll('.form__input-error'));
-    removeErrorTexts.forEach((item) => {
-        item.textContent = '';
-    });
 }
 // сохранение карточек
 function addFormSubmitHandler(evt) {
@@ -76,51 +66,30 @@ function formSubmitHandler(evt) {
     formInput();
 }
 
-// функция закрытия попапа кликом по фону и клавишей Esc
+// функция закрытия попапа кликом по фону
 function popupOverlayClose() {
-    const popupList = Array.from(document.querySelectorAll('.popup'));
     popupList.forEach((item) => {
         item.addEventListener('mousedown', evt => {
             if (evt.target === item) {
                 closePopup(item);
-                formInput();
-            }
-        });
-        document.addEventListener('keydown', (evt) => {
-            if (evt.key === 'Escape') {
-                item.classList.remove('popup_opened');
             }
         });
     });
 }
 popupOverlayClose();
-// функция закрытия попапа на крестик
-function closePopupButton() {
-    const popupList = Array.from(document.querySelectorAll('.popup'));
-    const closeButtonList = Array.from(document.querySelectorAll('.popup__close'));
-    closeButtonList.forEach((item) => {
-        item.addEventListener('click', () => {
-            closePopup(popupList);
-        });
-    });
-}
-closePopupButton();
+
 formElement.addEventListener('submit', formSubmitHandler);
 addFormCards.addEventListener('submit', addFormSubmitHandler);
 editProfile.addEventListener('click', () => {
     openPopup(popupEditProfile);
     formInput();
+    formValidation.cleanErrosFields();
 });
 addProfile.addEventListener('click', () => {
     openPopup(popupAddCards);
     formInput();
+    cardsFormValidation.cleanErrosFields();
 });
-// closePopupProfile.addEventListener('click', () => {
-//     popupOpenClose(popupEditProfile);
-//     formInput();
-// });
-// closePopupAddCards.addEventListener('click', () => {
-//     popupOpenClose(popupAddCards);
-//     formInput();
-// });
-// closePopupCardsButton.addEventListener('click', () => popupOpenClose(popupCards));
+closePopupProfile.addEventListener('click', () => closePopup(popupEditProfile));
+closePopupAddCards.addEventListener('click', () => closePopup(popupAddCards));
+closePopupCardsButton.addEventListener('click', () => closePopup(popupCards));

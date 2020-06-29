@@ -1,13 +1,14 @@
 export const popupCards = document.querySelector('.popup_cards');
 export const popupImage = document.querySelector('.popup__image');
 export const popupSubTitle = document.querySelector('.popup__subtitle');
+export const popupList = Array.from(document.querySelectorAll('.popup'));
 export const validation = {
     formSelector: '.form',
     inputSelector: '.form__input',
     submitButtonSelector: '.form__button',
     inactiveButtonClass: 'form__button_inactive',
     inputErrorClass: 'form__input_type_error',
-    errorClass: 'form__error_visible',
+    errorSelector: '.form__input-error',
     fieldSelector: '.form__field'
 };
 export const initialCards = [

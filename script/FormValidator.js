@@ -39,25 +39,33 @@ export class FormValidator {
     }
 
     enableValidation() {
-        // создаём массив полей
-        const fieldsetList = Array.from(this._formElement.querySelectorAll(this._data.fieldSelector));
-        // для каждого поля
-        fieldsetList.forEach((fieldset) => {
-            // создаём массив инпутов
-            const inputList = Array.from(fieldset.querySelectorAll(this._data.inputSelector));
-            // для каждого инпута создаём слушатель с проверкой валидности
-            inputList.forEach((inputElement) => {
-                inputElement.addEventListener('input', () => {
-                    this._checkInputValidity(inputElement);
-                    // находим кнопку отправки, сохранения данных
-                    const buttonElement = fieldset.querySelector(this._data.submitButtonSelector);
-                    // вызываем функцию активации, дезактивации кнопки
-                   this._toggleButtonState(inputList, buttonElement);
-                });
-                this._formElement.addEventListener('submit', function (evt) {
-                    evt.preventDefault();
-                });
+        const inputList = Array.from(this._formElement.querySelectorAll(this._data.inputSelector));
+        // для каждого инпута создаём слушатель с проверкой валидности
+        inputList.forEach((inputElement) => {
+            inputElement.addEventListener('input', () => {
+                this._checkInputValidity(inputElement);
+                // находим кнопку отправки, сохранения данных
+                const buttonElement = this._formElement.querySelector(this._data.submitButtonSelector);
+                // вызываем функцию активации, дезактивации кнопки
+                this._toggleButtonState(inputList, buttonElement);
             });
+            this._formElement.addEventListener('submit', function (evt) {
+                evt.preventDefault();
+            });
+        });
+
+    }
+
+    cleanErrosFields() {
+        // убираем красную линию
+        const removeErrors = Array.from(this._formElement.querySelectorAll(this._data.inputSelector));
+        removeErrors.forEach((item) => {
+            item.classList.remove(this._data.inputErrorClass);
+        });
+        // убираем текст ошибки
+        const removeErrorTexts = Array.from(this._formElement.querySelectorAll(this._data.errorSelector));
+        removeErrorTexts.forEach((item) => {
+            item.textContent = '';
         });
     }
 }
