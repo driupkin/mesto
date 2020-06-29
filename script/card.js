@@ -1,4 +1,5 @@
-import {popupOpenClose, popupCards} from './script.js';
+import { openPopup } from './utils.js';
+import { popupCards, popupImage, popupSubTitle} from './constants.js';
 export class Card {
     constructor(nameValue, urlValue, cardTemplate) {
         this._nameValue = nameValue;
@@ -29,15 +30,13 @@ export class Card {
             this._element.querySelector('.element__like').classList.toggle('element__like_active');
         });
         this._element.querySelector('.element__trash').addEventListener('click', () => {
-            this._element.querySelector('.element__trash').closest('.element').remove();
+            this._element.remove();
         });
         this._element.querySelector('.element__image').addEventListener('click', () => {
-            const popupImage = document.querySelector('.popup__image');
-            const popupSubTitle = document.querySelector('.popup__subtitle');
             popupImage.setAttribute('src', this._urlValue);
             popupImage.setAttribute('alt', this._nameValue);
             popupSubTitle.textContent = this._nameValue;
-            popupOpenClose(popupCards);
+            openPopup(popupCards);
         });
     }
 }
