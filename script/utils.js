@@ -1,11 +1,8 @@
-import { popupList } from './constants.js';
-
 const handleEscClose = (evt) => {
-    popupList.forEach((item) => {
-        if (evt.key === 'Escape') {
-            item.classList.remove('popup_opened');
-        }
-    });
+    const openedPopup = document.querySelector('.popup_opened');
+    if (evt.key === 'Escape') {
+        closePopup(openedPopup);
+    }
 }
 
 export function openPopup(popup) {

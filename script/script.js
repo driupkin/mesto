@@ -77,18 +77,17 @@ function popupOverlayClose() {
     });
 }
 popupOverlayClose();
-
 formElement.addEventListener('submit', formSubmitHandler);
 addFormCards.addEventListener('submit', addFormSubmitHandler);
 editProfile.addEventListener('click', () => {
     openPopup(popupEditProfile);
     formInput();
-    formValidation.cleanErrosFields();
+    formValidation.cleanErrorsFields();
 });
 addProfile.addEventListener('click', () => {
     openPopup(popupAddCards);
     formInput();
-    cardsFormValidation.cleanErrosFields();
+    cardsFormValidation.cleanErrorsFields();
 });
 closePopupProfile.addEventListener('click', () => closePopup(popupEditProfile));
 closePopupAddCards.addEventListener('click', () => closePopup(popupAddCards));

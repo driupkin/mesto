@@ -56,7 +56,7 @@ export class FormValidator {
 
     }
 
-    cleanErrosFields() {
+    cleanErrorsFields() {
         // убираем красную линию
         const removeErrors = Array.from(this._formElement.querySelectorAll(this._data.inputSelector));
         removeErrors.forEach((item) => {
