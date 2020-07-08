@@ -2,6 +2,7 @@ import { Card } from './Card.js';
 import { FormValidator } from './FormValidator.js';
 import { popupCards, validation, initialCards, popupList } from './constants.js';
 import { openPopup, closePopup } from './utils.js';
+import Popup from '../components/Popup.js';
 const popupEditProfile = document.querySelector('.popup_edit-profile');
 const popupAddCards = document.querySelector('.popup_add-cards');
 const editProfile = document.querySelector('.profile__button-edit');
@@ -67,21 +68,23 @@ function formSubmitHandler(evt) {
 }
 
 // функция закрытия попапа кликом по фону
-function popupOverlayClose() {
-    popupList.forEach((item) => {
-        item.addEventListener('mousedown', evt => {
-            if (evt.target === item) {
-                closePopup(item);
-            }
-        });
-    });
-}
-popupOverlayClose();
+// function popupOverlayClose() {
+//     popupList.forEach((item) => {
+//         item.addEventListener('mousedown', evt => {
+//             if (evt.target === item) {
+//                 closePopup(item);
+//             }
+//         });
+//     });
+// }
+// popupOverlayClose();
 
 formElement.addEventListener('submit', formSubmitHandler);
 addFormCards.addEventListener('submit', addFormSubmitHandler);
 editProfile.addEventListener('click', () => {
-    openPopup(popupEditProfile);
+    //openPopup(popupEditProfile);
+    const popup = new Popup('.popup_edit-profile');
+    popup.open();
     formInput();
     formValidation.cleanErrosFields();
 });
