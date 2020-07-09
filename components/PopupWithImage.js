@@ -11,5 +11,6 @@ export default class PopupWithImage extends Popup {
         popupImage.setAttribute('src', this._urlValue);
         popupImage.setAttribute('alt', this._nameValue);
         popupSubTitle.textContent = this._nameValue;
+        document.addEventListener('keydown', super._handleEscClose());
     }
 }

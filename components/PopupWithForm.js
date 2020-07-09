@@ -10,7 +10,6 @@ export default class PopupWithForm extends Popup {
         this._formValues = {};
         this._inputList.forEach(input => {
             this._formValues[input.name] = input.value;
-            console.log(this._formValues);
         });
         return this._formValues;
     }
@@ -23,13 +22,15 @@ export default class PopupWithForm extends Popup {
             }
         });
         const formElement = this._popup.querySelector('.form');
-        formElement.addEventListener('submit', function (evt) {
+        formElement.addEventListener('submit', (evt) => {
             evt.preventDefault();
             this._formSubmitHandler(this._getInputValues());
+            this.close();
         });
     }
     close() {
         this._popup.classList.remove('popup_opened');
         this._popup.querySelector('.form').reset();
+        document.removeEventListener('keydown', super._handleEscClose());
     }
 }

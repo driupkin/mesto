@@ -1,5 +1,3 @@
-import { openPopup } from './utils.js';
-import { popupCards, popupImage, popupSubTitle} from './constants.js';
 export class Card {
     constructor(nameValue, urlValue, cardTemplate, handleCardClick) {
         this._nameValue = nameValue;
@@ -34,10 +32,6 @@ export class Card {
             this._element.remove();
         });
         this._element.querySelector('.element__image').addEventListener('click', () => {
-            // popupImage.setAttribute('src', this._urlValue);
-            // popupImage.setAttribute('alt', this._nameValue);
-            // popupSubTitle.textContent = this._nameValue;
-            // openPopup(popupCards);
             this._handleCardClick();
         });
     }

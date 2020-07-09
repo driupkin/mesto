@@ -49,9 +49,6 @@ export class FormValidator {
                 // вызываем функцию активации, дезактивации кнопки
                 this._toggleButtonState(inputList, buttonElement);
             });
-            this._formElement.addEventListener('submit', function (evt) {
-                evt.preventDefault();
-            });
         });
 
     }
