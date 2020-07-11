@@ -7,7 +7,6 @@ import UserInfo from '../components/UserInfo.js';
 import Section from '../components/Section.js';
 const editProfile = document.querySelector('.profile__button-edit');
 const addProfile = document.querySelector('.profile__button-add');
-const elements = document.querySelector('.elements');
 const nameInput = document.querySelector('.form__input_name');
 const jobInput = document.querySelector('.form__input_description');
 const formButtonAddCards = document.querySelector('.form__button_add-card');
@@ -35,30 +34,28 @@ addProfile.addEventListener('click', () => {
     formButtonAddCards.classList.add('form__button_inactive');
     const popupAddCard = new PopupWithForm('.popup_add-cards', (item) => {
         const newCardList = new Section({
-            items: item, renderer: (item) => {
+            items: [item], renderer: (item) => {
                 const newCard = new Card(item.place, item.url, '#card', () => {
-                    const popupWithImage = new PopupWithImage({ urlValue: item.url, nameValue: item.place }, '.popup_cards');
-                    popupWithImage.open();
-                    popupWithImage.setEventListeners();
+                    const newPopupWithImage = new PopupWithImage({ urlValue: item.url, nameValue: item.place }, '.popup_cards');
+                    newPopupWithImage.open();
+                    newPopupWithImage.setEventListeners();
                 });
-                const cardElement = newCard.generateCard();
-                newCardList.addItem(cardElement);
-                
-            } 
-        }, '.elements'); newCardList.renderItems();
+                const newCardElement = newCard.generateCard();
+                newCardList.addItem(newCardElement);
+            }
+        }, '.elements');
+        newCardList.renderItems();
     });
     cardsFormValidation.enableValidation();
     popupAddCard.open();
     popupAddCard.setEventListeners();
     cardsFormValidation.cleanErrosFields();
-    
 });
 
 // Изменение данных в профиле
 editProfile.addEventListener('click', () => {
     const newUser = new UserInfo({ name: '.profile__name', description: '.profile__subtitle' });
     const popupEditProfile = new PopupWithForm('.popup_edit-profile', (item) => {
-        console.log(item);
         newUser.setUserInfo({ name: item.name, description: item.description });
     });
     formValidation.enableValidation();

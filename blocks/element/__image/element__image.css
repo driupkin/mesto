@@ -1,7 +1,8 @@
 .element__image {
     width: 282px;
     height: 282px;
-    object-fit: fill;
+    object-fit: cover; 
+    object-position: top;   
     border-radius: 10px 10px 0 0;
     position: relative;
     bottom: 23px;
