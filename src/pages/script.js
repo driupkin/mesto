@@ -1,17 +1,17 @@
-import { Card } from './Card.js';
-import FormValidator from './FormValidator.js';
-import { validation, initialCards } from './constants.js';
+import { Card } from '../components/card.js';
+import FormValidator from '../components/FormValidator.js';
+import {
+    validation, initialCards,
+    editProfile, addProfile,
+    nameInput, jobInput,
+    formButtonAddCards,
+    selector, cardsSelector
+} from '../utils/constants.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
-import Section from '../components/Section.js';
-const editProfile = document.querySelector('.profile__button-edit');
-const addProfile = document.querySelector('.profile__button-add');
-const nameInput = document.querySelector('.form__input_name');
-const jobInput = document.querySelector('.form__input_description');
-const formButtonAddCards = document.querySelector('.form__button_add-card');
-const selector = document.querySelector('.form');
-const cardsSelector = document.querySelector('.form_cards');
+import Section from '../components/Section.js.js';
+
 const formValidation = new FormValidator(validation, selector);
 const cardsFormValidation = new FormValidator(validation, cardsSelector);
 
