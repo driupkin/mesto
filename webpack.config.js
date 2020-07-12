@@ -21,7 +21,7 @@ module.exports = {
             },
             {
                 // регулярное выражение, которое ищет все файлы с такими расширениями
-                test: /\.(png|svg|jpg|gif|woff2)$/,
+                test: /\.(png|svg|jpg|gif|woff2|woff)$/,
                 // при обработке этих файлов нужно использовать file-loader
                 loader: 'file-loader'
             },
