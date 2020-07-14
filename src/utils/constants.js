@@ -1,15 +1,3 @@
-export const popupCards = document.querySelector('.popup_cards');
-export const popupImage = document.querySelector('.popup__image');
-export const popupSubTitle = document.querySelector('.popup__subtitle');
-export const popupList = Array.from(document.querySelectorAll('.popup'));
-export const editProfile = document.querySelector('.profile__button-edit');
-export const addProfile = document.querySelector('.profile__button-add');
-export const nameInput = document.querySelector('.form__input_name');
-export const jobInput = document.querySelector('.form__input_description');
-export const formButtonAddCards = document.querySelector('.form__button_add-card');
-export const formButtonEditCards = document.querySelector('.form__button_edit-card');
-export const selector = document.querySelector('.form');
-export const cardsSelector = document.querySelector('.form_cards');
 export const validation = {
     formSelector: '.form',
     inputSelector: '.form__input',
