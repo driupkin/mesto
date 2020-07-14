@@ -1,9 +1,0 @@
-@import url('../element/__title/element__title.css');
-@import url('../element/__image/element__image.css');
-@import url('../element/__like/element__like.css');
-@import url('./__paragraph/element__paragraph.css');
-.element {
-    width: 282px;
-    background-color: white;
-    border-radius: 10px;
-}
