@@ -16,8 +16,8 @@ const selector = document.querySelector('.form');
 const cardsSelector = document.querySelector('.form_cards');
 
 function templateCard(item) {
-    const card = new Card({ nameValue: item.name, urlValue: item.link }, '#card', () => {
-        const popupWithImage = new PopupWithImage({ nameValue: item.name, urlValue: item.link },
+    const card = new Card({ nameValue: item.name, urlValue: item.link }, '#card', (name, link) => {
+        const popupWithImage = new PopupWithImage({ nameValue: name, urlValue: link },
             '.popup_cards', { imageSelector: '.popup__image', subtitleSelector: '.popup__subtitle' });
         popupWithImage.open();
         popupWithImage.setEventListeners();

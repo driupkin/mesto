@@ -19,12 +19,16 @@ module.exports = {
                 // исключает папку node_modules, файлы в ней обрабатывать не нужно
                 exclude: '/node_modules/'
             },
+           
             {
-                // регулярное выражение, которое ищет все файлы с такими расширениями
-                test: /\.(png|svg|jpg|gif|woff2|woff)$/,
-                // при обработке этих файлов нужно использовать file-loader
-                loader: 'file-loader'
+                test: /.(png|svg|jpg|gif)$/,
+                loader: 'file-loader?name=./images/[name].[ext]'
             },
+            {
+                test: /.(eot|ttf|woff|woff2)$/,
+                loader: 'file-loader?name=./vendor/[name].[ext]',
+            },
+            
             {
                 test: /\.html$/,
                 loader: 'html-loader',
@@ -50,6 +54,6 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: './src/index.html'
         }),
-        new MiniCssExtractPlugin()
+        new MiniCssExtractPlugin(),
     ]
 };
