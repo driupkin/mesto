@@ -3,15 +3,23 @@ export default class Api {
         this.url = url;
         this.headers = headers;
     }
-    getTasks() {
+    _handleResponse(res) {
+        if (res.ok) {
+            return res.json();
+        } else {
+            console.log('_handleResponse rejection')
+            return Promise.reject(res.statusText)
+        }
+    }
+
+    _handleResponseError(err) {
+        console.log('_handleResponseError')
+        return Promise.reject(err.message)
+    }
+    getData() {
         return fetch(this.url, { headers: this.headers })
-            .then(res => {
-                if (res.ok) {
-                    return res.json();
-                } else {
-                    console.error(`Ошибка : ${res.status}`);
-                }
-            });
+            .then(this._handleResponse)
+            .catch(this._handleResponseError)
     }
     editProfile(values) {
         return fetch(this.url, {
@@ -22,13 +30,8 @@ export default class Api {
                 about: values.description
             })
         })
-            .then(res => {
-                if (res.ok) {
-                    return res.json();
-                } else {
-                    console.error(`Ошибка : ${res.status}`);
-                }
-            });
+            .then(this._handleResponse)
+            .catch(this._handleResponseError)
     }
     addCard(values) {
         return fetch(this.url, {
@@ -39,12 +42,18 @@ export default class Api {
                 link: values.link
             })
         })
-            .then(res => {
-                if (res.ok) {
-                    return res.json();
-                } else {
-                    console.error(`Ошибка : ${res.status}`);
-                }
-            });
+            .then(this._handleResponse)
+            .catch(this._handleResponseError)
+    }
+    deleteCard(id) {
+        return fetch(
+            `${this.url}/${id}`,
+            {
+                headers: this.headers,
+                method: 'DELETE',
+            }
+        )
+            .then(this._handleResponse)
+            .catch(this._handleResponseError)
     }
 }

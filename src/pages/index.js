@@ -19,9 +19,10 @@ const cardsSelector = document.querySelector('.form_cards');
 const profileName = document.querySelector('.profile__name');
 const profileTitle = document.querySelector('.profile__subtitle');
 const profileAvatar = document.querySelector('.profile__avatar');
-
+const trashButton = document.querySelector('.element__trash');
+// функция создания экземпляра карточки
 function templateCard(item) {
-    const card = new Card({ nameValue: item.name, urlValue: item.link }, '#card', (name, link) => {
+    const card = new Card({ nameValue: item.name, urlValue: item.link, likesValue: item.likes }, '#card', (name, link) => {
         const popupWithImage = new PopupWithImage({ nameValue: name, urlValue: link },
             '.popup_cards', { imageSelector: '.popup__image', subtitleSelector: '.popup__subtitle' });
         popupWithImage.open();
@@ -36,7 +37,7 @@ const apiMe = new Api({
         'Content-Type': 'application/json'
     }
 });
-apiMe.getTasks()
+apiMe.getData()
     .then(data => {
         profileName.textContent = data.name;
         profileTitle.textContent = data.about;
@@ -50,11 +51,12 @@ const apiCards = new Api({
         'Content-Type': 'application/json'
     }
 });
-apiCards.getTasks()
+apiCards.getData()
     .then(data => {
         // добавление карточек из массива
         const cardList = new Section({
             items: data, renderer: (item) => {
+                console.log(item);
                 const cardElement = templateCard(item);
                 cardList.addItem(cardElement);
             }
@@ -66,7 +68,9 @@ apiCards.getTasks()
 const cardsFormValidation = new FormValidator(validation, cardsSelector);
 const popupAddCard = new PopupWithForm('.popup_add-cards', (item) => {
     const newCardList = new Section({
-        items: [item], renderer: (item) => { console.log(item);
+        items: [item], renderer: (item) => {
+            item.likes = [];
+            console.log(item);
             apiCards.addCard(item); // запрос на сервер
             const newCardElement = templateCard(item);
             newCardList.addItem(newCardElement);
