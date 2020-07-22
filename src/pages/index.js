@@ -8,6 +8,7 @@ import Section from '../components/Section.js';
 import Api from '../components/Api.js';
 import { validation, initialCards, } from '../utils/constants.js';
 import { data } from 'autoprefixer';
+import PopupDeleteCard from '../components/PopupDeleteCard';
 const editProfile = document.querySelector('.profile__button-edit');
 const addProfile = document.querySelector('.profile__button-add');
 const nameInput = document.querySelector('.form__input_name');
@@ -20,14 +21,32 @@ const profileName = document.querySelector('.profile__name');
 const profileTitle = document.querySelector('.profile__subtitle');
 const profileAvatar = document.querySelector('.profile__avatar');
 const trashButton = document.querySelector('.element__trash');
+const userID = document.querySelector('.profile');
 // функция создания экземпляра карточки
 function templateCard(item) {
-    const card = new Card({ nameValue: item.name, urlValue: item.link, likesValue: item.likes }, '#card', (name, link) => {
-        const popupWithImage = new PopupWithImage({ nameValue: name, urlValue: link },
-            '.popup_cards', { imageSelector: '.popup__image', subtitleSelector: '.popup__subtitle' });
-        popupWithImage.open();
-        popupWithImage.setEventListeners();
-    });
+    const card = new Card(
+        {
+            nameValue: item.name,
+            urlValue: item.link,
+            likesValue: item.likes,
+            ownerId: userID.id,
+            cardOwnerId: item.owner._id
+        },
+        '#card',
+        (name, link) => {
+            const popupWithImage = new PopupWithImage({ nameValue: name, urlValue: link },
+                '.popup_cards', { imageSelector: '.popup__image', subtitleSelector: '.popup__subtitle' });
+            popupWithImage.open();
+            popupWithImage.setEventListeners();
+        },
+        () => {
+            const popupDeleteCard = new PopupDeleteCard('.popup_delete-cards', ()=> {
+                apiCards.deleteCard(item._id);
+                popupDeleteCard.close();
+            });
+            popupDeleteCard.open();
+            popupDeleteCard.setEventListeners();
+        });
     return card.generateCard();
 }
 const apiMe = new Api({
@@ -42,8 +61,8 @@ apiMe.getData()
         profileName.textContent = data.name;
         profileTitle.textContent = data.about;
         profileAvatar.src = data.avatar;
+        userID.id = data._id;
     });
-
 const apiCards = new Api({
     url: 'https://mesto.nomoreparties.co/v1/cohort-13/cards',
     headers: {
@@ -56,7 +75,7 @@ apiCards.getData()
         // добавление карточек из массива
         const cardList = new Section({
             items: data, renderer: (item) => {
-                console.log(item);
+                //console.log(item);
                 const cardElement = templateCard(item);
                 cardList.addItem(cardElement);
             }
@@ -70,6 +89,8 @@ const popupAddCard = new PopupWithForm('.popup_add-cards', (item) => {
     const newCardList = new Section({
         items: [item], renderer: (item) => {
             item.likes = [];
+            item.owner = {};
+            item.owner._id = userID.id;
             console.log(item);
             apiCards.addCard(item); // запрос на сервер
             const newCardElement = templateCard(item);

@@ -4,6 +4,7 @@
 @import url('./__container/_card/popup__container_card.css');
 @import url('./__image/popup__image.css');
 @import url('./__subtitle/popup__subtitle.css');
+@import url('./__container/_delete-card/popup__container_delete-card.css');
 .popup {
     display: flex;
     visibility: hidden;

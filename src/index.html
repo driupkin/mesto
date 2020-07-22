@@ -13,7 +13,7 @@
             <div class="logo"></div>
         </header>
         <main class="content">
-            <section class="profile">
+            <section class="profile" id="">
                 <img src="./images/profile-images/kusto.jpg" alt="Аватар пользователя" class="profile__avatar">
                 <div class="profile__info">
                     <div class="profile__title">
@@ -86,6 +86,16 @@
             <button type="button" class="popup__close popup__close_card"></button>
             <img src="#" alt="#" class="popup__image">
             <p class="popup__subtitle"></p>
+        </div>
+    </section>
+
+    <section class="popup popup_delete-cards">
+        <div class="popup__container popup__container_delete-card">
+            <form class="form form_delete-cards" name="popup_delete-cards" method="GET" action="#">
+                <button type="button" class="popup__close popup__close_delete-card"></button>
+                <h2 class="form__title form__title_delete-card">Вы уверены?</h2>
+                <button type="submit" class="form__button form__button_delete-card">Да</button>
+            </form>
         </div>
     </section>
 </body>
