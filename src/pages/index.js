@@ -21,17 +21,17 @@ const profileName = document.querySelector('.profile__name');
 const profileTitle = document.querySelector('.profile__subtitle');
 const profileAvatar = document.querySelector('.profile__avatar');
 const trashButton = document.querySelector('.element__trash');
-const userID = document.querySelector('.profile');
+const profile = document.querySelector('.profile');
 // функция создания экземпляра карточки
 function templateCard(item) {
-    const card = new Card(
-        {
-            nameValue: item.name,
-            urlValue: item.link,
-            likesValue: item.likes,
-            ownerId: userID.id,
-            cardOwnerId: item.owner._id
-        },
+    const card = new Card(item,
+        // {
+        // nameValue: item.name,
+        // urlValue: item.link,
+        // likesValue: item.likes,
+        // ownerId: profile.id,
+        // cardOwnerId: item.owner._id
+        // },
         '#card',
         (name, link) => {
             const popupWithImage = new PopupWithImage({ nameValue: name, urlValue: link },
@@ -39,15 +39,33 @@ function templateCard(item) {
             popupWithImage.open();
             popupWithImage.setEventListeners();
         },
-        () => {
-            const popupDeleteCard = new PopupDeleteCard('.popup_delete-cards', ()=> {
+        (element) => {
+            const popupDeleteCard = new PopupDeleteCard('.popup_delete-cards', () => {
                 apiCards.deleteCard(item._id);
+                element.remove();
                 popupDeleteCard.close();
             });
             popupDeleteCard.open();
             popupDeleteCard.setEventListeners();
+        },
+        (element) => {
+            if (item.likes.some((el) => el._id === profile.id)) {
+                apiCards.deleteLike(item._id)
+                    .then(data => {
+                        item = data;
+                        element.querySelector('.elment__likes-count').textContent = data.likes.length;
+                    });
+
+            } else {
+                apiCards.putLike(item._id)
+                    .then(data => {
+                        item = data;
+                        element.querySelector('.elment__likes-count').textContent = data.likes.length;
+                    });
+
+            }
         });
-    return card.generateCard();
+    return card.generateCard(profile.id);
 }
 const apiMe = new Api({
     url: 'https://mesto.nomoreparties.co/v1/cohort-13/users/me',
@@ -61,7 +79,7 @@ apiMe.getData()
         profileName.textContent = data.name;
         profileTitle.textContent = data.about;
         profileAvatar.src = data.avatar;
-        userID.id = data._id;
+        profile.id = data._id;
     });
 const apiCards = new Api({
     url: 'https://mesto.nomoreparties.co/v1/cohort-13/cards',
@@ -75,7 +93,7 @@ apiCards.getData()
         // добавление карточек из массива
         const cardList = new Section({
             items: data, renderer: (item) => {
-                //console.log(item);
+                console.log(item);
                 const cardElement = templateCard(item);
                 cardList.addItem(cardElement);
             }
@@ -88,13 +106,15 @@ const cardsFormValidation = new FormValidator(validation, cardsSelector);
 const popupAddCard = new PopupWithForm('.popup_add-cards', (item) => {
     const newCardList = new Section({
         items: [item], renderer: (item) => {
-            item.likes = [];
-            item.owner = {};
-            item.owner._id = userID.id;
+            // item.likes = [];
+            // item.owner = {};
+            // item.owner._id = profile.id;
             console.log(item);
-            apiCards.addCard(item); // запрос на сервер
-            const newCardElement = templateCard(item);
-            newCardList.addItem(newCardElement);
+            apiCards.addCard(item)// запрос на сервер
+                .then(data => templateCard(data)) // data объект со свойствами карточки
+                .then(cardElement => newCardList.addItem(cardElement));
+            // const newCardElement = templateCard(item);
+            //newCardList.addItem(newCardElement);
         }
     }, '.elements');
     newCardList.renderItems();
