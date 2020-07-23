@@ -1,11 +1,5 @@
 export default class Card {
     constructor(values = {}, cardTemplate, handleCardClick, handleTrashClick, handleLikeClick) {
-        // this._nameValue = values.nameValue;
-        // this._urlValue = values.urlValue;
-        // this._likesValue = values.likesValue;
-        // this._ownerId = values.ownerId;
-        // this._cardOwnerId = values.cardOwnerId;
-        // this._idValue = values.idValue;
         this._nameValue = values.name;
         this._urlValue = values.link;
         this._likesValue = values.likes;

@@ -5,6 +5,7 @@
 @import url('./__input-error/form__input-error.css');
 @import url('./__title/_delete-card/form__title_delete-card.css');
 @import url('./__button/_delete-card/form__button_delete-card.css');
+@import url('./__button/_change-avatar/form__button_change-avatar.css');
 .form {
     display: flex;
     flex-direction: column;

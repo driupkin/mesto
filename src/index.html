@@ -14,7 +14,10 @@
         </header>
         <main class="content">
             <section class="profile" id="">
-                <img src="./images/profile-images/kusto.jpg" alt="Аватар пользователя" class="profile__avatar">
+                <div class="profile__avatar_container">
+                    <img src="./images/profile-images/kusto.jpg" alt="Аватар пользователя" class="profile__avatar">
+                    <div class="profile__avatar_change"></div>
+                </div>
                 <div class="profile__info">
                     <div class="profile__title">
                         <h1 class="profile__name">Жак-Ив Кусто</h1>
@@ -95,6 +98,21 @@
                 <button type="button" class="popup__close popup__close_delete-card"></button>
                 <h2 class="form__title form__title_delete-card">Вы уверены?</h2>
                 <button type="submit" class="form__button form__button_delete-card">Да</button>
+            </form>
+        </div>
+    </section>
+
+    <section class="popup popup_change-avatar">
+        <div class="popup__container popup__container_change-avatar">
+            <button type="button" class="popup__close popup__close_change-avatar"></button>
+            <form class="form form_change-avatar" name="popup_change-avatar" method="GET" action="#">
+                <h2 class="form__title form__title_change-avatar">Обновить аватар</h2>
+                <fieldset class="form__field">                    
+                    <input name="avatar" placeholder="Ссылка на аватар" class="form__input form__input_url" type="url"
+                        id="url-input" required>
+                    <span class='form__input-error' id='url-input-error'></span>
+                    <button type="submit" class="form__button form__button_change-avatar">Сохранить</button>
+                </fieldset>
             </form>
         </div>
     </section>

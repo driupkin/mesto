@@ -8,7 +8,7 @@ export default class Api {
             return res.json();
         } else {
             console.log('_handleResponse rejection')
-            return Promise.reject(res.statusText)
+            return Promise.reject(`Ошибка: ${res.status}`)
         }
     }
 
@@ -51,8 +51,7 @@ export default class Api {
             {
                 headers: this.headers,
                 method: 'DELETE',
-            }
-        )
+            })
             .then(this._handleResponse)
             .catch(this._handleResponseError)
     }
@@ -62,8 +61,7 @@ export default class Api {
             {
                 headers: this.headers,
                 method: 'PUT',
-            }
-        )
+            })
             .then(this._handleResponse)
             .catch(this._handleResponseError)
     }
@@ -73,8 +71,21 @@ export default class Api {
             {
                 headers: this.headers,
                 method: 'DELETE',
-            }
-        )
+            })
+            .then(this._handleResponse)
+            .catch(this._handleResponseError)
+    }
+    cangeAvatar(avatar) {
+        return fetch(
+            `${this.url}/avatar`,
+            {
+                method: 'PATCH',
+                headers: this.headers,
+                body: JSON.stringify({
+                    avatar
+                })
+
+            })
             .then(this._handleResponse)
             .catch(this._handleResponseError)
     }
