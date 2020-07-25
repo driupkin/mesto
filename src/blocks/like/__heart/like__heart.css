@@ -1,4 +1,4 @@
-.element__like {
+.like__heart {
     width: 21px;
     height: 18px;
     background-image: url('../../../images/like.svg');
@@ -13,10 +13,10 @@
     padding: 0;
 }
 
-.element__like:active, .element__like:focus {
+.like__heart:active, .like__heart:focus {
     outline: none;
 }
 
-.element__like:hover {
+.like__heart:hover {
     opacity: 0.6;
 }
