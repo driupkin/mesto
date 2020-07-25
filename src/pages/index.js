@@ -7,7 +7,6 @@ import UserInfo from '../components/UserInfo.js';
 import Section from '../components/Section.js';
 import Api from '../components/Api.js';
 import { validation } from '../utils/constants.js';
-import { data } from 'autoprefixer';
 import PopupDeleteCard from '../components/PopupDeleteCard';
 const editProfile = document.querySelector('.profile__button-edit');
 const addProfile = document.querySelector('.profile__button-add');
@@ -49,7 +48,7 @@ function templateCard(item) {
                 apiCards.deleteLike(item._id)
                     .then(data => {
                         item = data;
-                        element.querySelector('.elment__likes-count').textContent = data.likes.length;
+                        element.querySelector('.like__count').textContent = data.likes.length;
                     })
                     .catch((err) => {
                         console.log(err);
@@ -58,7 +57,7 @@ function templateCard(item) {
                 apiCards.putLike(item._id)
                     .then(data => {
                         item = data;
-                        element.querySelector('.elment__likes-count').textContent = data.likes.length;
+                        element.querySelector('.like__count').textContent = data.likes.length;
                     })
                     .catch((err) => {
                         console.log(err);
@@ -96,7 +95,6 @@ apiCards.getData()
         // добавление карточек из массива
         const cardList = new Section({
             items: data, renderer: (item) => {
-                console.log(item);
                 const cardElement = templateCard(item);
                 cardList.addItem(cardElement);
             }
@@ -112,7 +110,6 @@ const cardsFormValidation = new FormValidator(validation, cardsSelector);
 const popupAddCard = new PopupWithForm('.popup_add-cards', (item) => {
     const newCardList = new Section({
         items: [item], renderer: (item) => {
-            console.log(item);
             apiCards.addCard(item)// запрос на сервер
                 .then(data => templateCard(data)) // data объект со свойствами карточки
                 .then(cardElement => newCardList.addItem(cardElement))
@@ -134,7 +131,7 @@ const popupEditProfile = new PopupWithForm('.popup_edit-profile', (item) => {
     formButtonEditCards.textContent = 'Сохранение...';
     apiMe.editProfile(item); // запрос на сервер
     newUser.setUserInfo({ name: item.name, description: item.description });
-    setTimeout(() => popupEditProfile.close(), 2000);
+    popupEditProfile.close();
 });
 formValidation.enableValidation();
 popupEditProfile.setEventListeners();

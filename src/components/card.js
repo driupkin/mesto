@@ -24,13 +24,14 @@ export default class Card {
     generateCard(myId) {
         this._element = this._getTemplate();
         this._setEventListeners();
-        this._element.querySelector('.element__image').alt = this._nameValue;
-        this._element.querySelector('.element__image').src = this._urlValue;
+        this._elementImage = this._element.querySelector('.element__image');
+        this._elementImage.alt = this._nameValue;
+        this._elementImage.src = this._urlValue;
         this._element.querySelector('.element__paragraph').textContent = this._nameValue;
-        this._element.querySelector('.elment__likes-count').textContent = this._likesValue.length;
+        this._element.querySelector('.like__count').textContent = this._likesValue.length;
 
         if (this._likesValue.some((el) => el._id === myId)) {
-            this._element.querySelector('.element__like').classList.add('element__like_active');
+            this._element.querySelector('.like__heart').classList.add('like__heart_active');
         }
 
         if (this._cardOwnerId === myId) {
@@ -40,8 +41,8 @@ export default class Card {
     }
 
     _setEventListeners() {
-        this._element.querySelector('.element__like').addEventListener('click', () => {
-            this._element.querySelector('.element__like').classList.toggle('element__like_active');
+        this._element.querySelector('.like__heart').addEventListener('click', () => {
+            this._element.querySelector('.like__heart').classList.toggle('like__heart_active');
             this._handleLikeClick(this._element);
         });
         this._element.querySelector('.element__trash').addEventListener('click', () => {
