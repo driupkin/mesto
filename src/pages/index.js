@@ -23,6 +23,7 @@ const profileTitle = document.querySelector('.profile__subtitle');
 const profileAvatar = document.querySelector('.profile__avatar');
 const profile = document.querySelector('.profile');
 const profileAvatarChange = document.querySelector('.profile__avatar_change');
+const cardElements = document.querySelector('.elements__image-load');
 // функция создания экземпляра карточки
 function templateCard(item) {
     const card = new Card(
@@ -92,6 +93,7 @@ const apiCards = new Api({
 });
 apiCards.getData()
     .then(data => {
+        cardElements.remove();
         // добавление карточек из массива
         const cardList = new Section({
             items: data, renderer: (item) => {
@@ -139,7 +141,6 @@ popupEditProfile.setEventListeners();
 // Изменение аватара
 const avatarFormValidation = new FormValidator(validation, avatarSelector);
 const popupChangeAvatar = new PopupWithForm('.popup_change-avatar', (item) => {
-    console.log(item);
     apiMe.cangeAvatar(item.avatar);
     profileAvatar.src = item.avatar;
     popupChangeAvatar.close();
@@ -154,7 +155,7 @@ profileAvatarChange.addEventListener('click', () => {
 })
 
 editProfile.addEventListener('click', () => {
-    formButtonEditCards.textContent = 'Сохраненить';
+    formButtonEditCards.textContent = 'Сохранить';
     formButtonEditCards.classList.remove('form__button_inactive');
     nameInput.value = newUser.getUserInfo().name;
     jobInput.value = newUser.getUserInfo().description;
