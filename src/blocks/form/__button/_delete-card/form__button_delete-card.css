@@ -2,3 +2,9 @@
     margin-top: 38px;
     width: 358px;
 }
+
+@media screen and (max-width: 550px) {
+    .form__button_delete-card {
+        width: 65vw;
+    }
+}

@@ -14,3 +14,4 @@
 @import url('../blocks/form/__button/_inactive/form__button_inactive.css');
 @import url('../blocks/form/__input/_type/form__input_type_error.css');
 @import url('../blocks/like/like.css');
+@import url('../blocks/form/_delete-cards/form_delete-cards.css');
