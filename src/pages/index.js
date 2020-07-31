@@ -141,7 +141,7 @@ popupEditProfile.setEventListeners();
 // Изменение аватара
 const avatarFormValidation = new FormValidator(validation, avatarSelector);
 const popupChangeAvatar = new PopupWithForm('.popup_change-avatar', (item) => {
-    apiMe.cangeAvatar(item.avatar);
+    apiMe.changeAvatar(item.avatar);
     profileAvatar.src = item.avatar;
     popupChangeAvatar.close();
 });

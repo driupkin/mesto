@@ -75,7 +75,7 @@ export default class Api {
             .then(this._handleResponse)
             .catch(this._handleResponseError)
     }
-    cangeAvatar(avatar) {
+    changeAvatar(avatar) {
         return fetch(
             `${this.url}/avatar`,
             {
